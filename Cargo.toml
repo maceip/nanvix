@@ -150,6 +150,7 @@ members = [
         "src/tests/integration/test-rust-vfs-test",
         "src/uservm",
         "src/user/hello-rust-nostd",
+        "src/user/wasmtime-guest",
         "src/utils/echo-client",
         "src/utils/gen-headers",
         "src/utils/mkimage",
@@ -164,6 +165,11 @@ members = [
         "src/libs/nanvix-shim-proto",
         "src/libs/nanvix-shim-standalone",
         "src/utils/containerd-shim-nanvix-v1",
+]
+exclude = [
+        # Standalone wasm32-unknown-unknown crate. It is built on the host
+        # toolchain, then precompiled into the wasmtime guest.
+        "src/user/rustls-simpleserver",
 ]
 
 [workspace.package]

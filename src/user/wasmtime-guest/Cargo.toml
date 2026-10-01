@@ -1,0 +1,38 @@
+# Copyright(c) The Maintainers of Nanvix.
+# Licensed under the MIT License.
+
+[package]
+name = "wasmtime-guest"
+version.workspace = true
+license-file.workspace = true
+edition.workspace = true
+authors.workspace = true
+description = "Vanilla Wasmtime embedded in a Nanvix guest"
+homepage.workspace = true
+
+[[bin]]
+name = "wasmtime-guest"
+
+[dependencies]
+libc_string = { workspace = true }
+sys = { workspace = true }
+nvx = { workspace = true }
+nvx-crt0 = { workspace = true, features = ["rust-main", "provides-allocator"] }
+sysalloc = { workspace = true }
+# Upstream Wasmtime. `std` stays off so this links as a Nanvix no_std guest.
+# Pulley interprets bytecode that the host precompiled; Cranelift is not in
+# the guest.
+wasmtime = { version = "49.0.1", default-features = false, features = ["runtime", "pulley", "gc", "gc-null"] }
+
+[build-dependencies]
+# Host compiler. `all-arch` turns on the Pulley backends so an Apple Silicon
+# host can emit pulley32 bytecode for the i686 guest.
+wasmtime = { version = "49.0.1", features = ["all-arch"] }
+wat = "1"
+
+[features]
+default = ["panic"]
+panic = ["nvx/panic", "nvx-crt0/panic"]
+
+[lints]
+workspace = true
