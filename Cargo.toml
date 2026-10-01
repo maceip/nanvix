@@ -150,7 +150,7 @@ members = [
         "src/tests/integration/test-rust-vfs-test",
         "src/uservm",
         "src/user/hello-rust-nostd",
-        "src/user/wasmtime-guest",
+        "src/user/wasm/wasmtime-guest",
         "src/utils/echo-client",
         "src/utils/gen-headers",
         "src/utils/mkimage",
@@ -169,7 +169,7 @@ members = [
 exclude = [
         # Standalone wasm32-unknown-unknown crate. It is built on the host
         # toolchain, then precompiled into the wasmtime guest.
-        "src/user/rustls-simpleserver",
+        "src/user/wasm/rustls-simpleserver",
 ]
 
 [workspace.package]

@@ -4,7 +4,7 @@ Vanilla Wasmtime 49, Pulley32, on the Nanvix user ABI. The host `build.rs`
 precompiles a `wasm32-unknown-unknown` module. This guest interprets it and
 forwards a small import set to Nanvix TCP.
 
-The module loaded today is `src/user/rustls-simpleserver`, the rustls
+The module loaded today is `src/user/wasm/rustls-simpleserver`, the rustls
 simpleserver example built with rustls-rustcrypto. It listens on port 4443.
 A host client has completed a TLS 1.3 handshake (`TLS_AES_256_GCM_SHA384`)
 and received `Hello from the server`.

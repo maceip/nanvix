@@ -51,11 +51,11 @@ fn main() {
     println!("cargo:rerun-if-changed={}", linker_script.display());
 
     let wasm_path = nanvix_root.join(
-        "src/user/rustls-simpleserver/target/wasm32-unknown-unknown/release/rustls_simpleserver.wasm",
+        "src/user/wasm/rustls-simpleserver/target/wasm32-unknown-unknown/release/rustls_simpleserver.wasm",
     );
     let wasm_path = wasm_path.canonicalize().unwrap_or_else(|_| {
         eprintln!(
-            "missing {}; build src/user/rustls-simpleserver for wasm32-unknown-unknown first",
+            "missing {}; build src/user/wasm/rustls-simpleserver for wasm32-unknown-unknown first",
             wasm_path.display()
         );
         process::exit(1);
