@@ -128,8 +128,10 @@ itself); it is left out of the table.
    `src/libs/slab/src/lib.proof.rs:398: assert(diff == j * bs);` (just after
    `lemma_fundamental_div_mod(diff, bs)`). This is likely an arithmetic or trigger change in
    newer `vstd`/Verus. The fix is probably a one-line proof tweak, e.g. using the lemma's
-   `diff == bs * (diff / bs) + diff % bs` form explicitly or a `by (nonlinear_arith)`. That has not
-   been tried here. Latest failing run:
+   `diff == bs * (diff / bs) + diff % bs` form explicitly or a `by (nonlinear_arith)`. Not yet
+   tried upstream. A candidate fix (Verus bump plus a `by (nonlinear_arith)` step) is on
+   [`maceip/nanvix:fix-slab-proof-verus-update`](https://github.com/maceip/nanvix/tree/fix-slab-proof-verus-update);
+   it verifies all five crates locally on Verus 0.2026.11.02 (macOS arm64) with 0 errors. Latest failing run:
    [verus-update on 2026-11-16](https://github.com/nanvix/nanvix/actions/workflows/verus-update.yml).
 2. **Virtual memory is unverified.** [#3136](https://github.com/nanvix/nanvix/pull/3136) is a
    draft marked "do not merge" and has been idle since 2026-09-11.
