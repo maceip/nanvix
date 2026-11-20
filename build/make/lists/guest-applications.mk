@@ -3,4 +3,5 @@
 
 # Guest application binaries. One entry per line to minimize merge conflicts.
 ALL_GUEST_APPLICATIONS := \
-	hello-rust-nostd
+	hello-rust-nostd \
+	irrigation-controller
