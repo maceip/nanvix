@@ -27,3 +27,6 @@ vstd = { workspace = true }
 [features]
 default = ["panic"]
 panic = ["nvx/panic", "syscall/panic", "nvx-crt0/panic"]
+
+[lints]
+workspace = true
