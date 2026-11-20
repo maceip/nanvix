@@ -395,7 +395,10 @@ impl Slab {
             assert(!slab.index@.is_bit_set(j));
             // a == (data_addr + j * bs) as usize
             vstd::arithmetic::div_mod::lemma_fundamental_div_mod(diff, bs);
-            assert(diff == j * bs);
+            // lemma gives: diff == bs * (diff / bs) + diff % bs. Newer Verus no longer derives
+            // the commuted product automatically, so close the step with nonlinear arithmetic.
+            assert(diff == j * bs) by (nonlinear_arith)
+                requires diff == bs * j + diff % bs, diff % bs == 0;
             assert(a == (data_addr_as_int + j * bs) as usize);
             // So a is in free_addrs
             let free_bits = Set::range(0, slab.num_data_blocks() as int)
